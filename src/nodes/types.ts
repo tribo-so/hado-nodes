@@ -16,6 +16,16 @@ export type CredentialMeta = z.infer<typeof zCredentialMeta> & {
   test: (ctx: TestCredentialContext) => Promise<any>;
 };
 
+export interface NodeActionPowered extends NodeAction {
+  operationsRecord: Record<string, NodeOperation>;
+}
+
+export interface NodePowered extends Node {
+  actionsRecord: Record<string, NodeActionPowered>;
+  credentialsRecord: Record<string, CredentialMeta>;
+  propertiesRecord: Record<string, NodeProperty>;
+}
+
 export interface Node {
   type: string;
   label: string;
