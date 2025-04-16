@@ -118,7 +118,7 @@ export const generateRunContextMocks = (
 ): [RunContext, Commands] => {
   return [
     generateRunContextMock(opts),
-    generateRunCommandsMock(node, (opts.credentials = {})),
+    generateRunCommandsMock(node, (opts.credentials as Credential) || {}),
   ];
 };
 
