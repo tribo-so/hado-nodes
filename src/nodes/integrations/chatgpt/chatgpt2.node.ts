@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { Node, NodeCategory, builder } from "src/nodes";
 
 export default {
-  type: "chatgpt2",
+  type: "chatgpt",
   label: "ChatGPT",
   description: "Chat with ChatGPT",
   image_src:
