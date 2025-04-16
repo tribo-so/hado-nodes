@@ -8,12 +8,16 @@
 
 <div align="center">
 
-✨✨✨ Este repositório contém os nodes utilizados pelo sistema Hado. Aqui você pode contribuir com novos nodes, editar existentes ou apenas entender como tudo funciona por baixo dos panos. ✨✨✨
+✨✨✨ Repositório público de nodes ✨✨✨
 
 [![Prod Hado](https://img.shields.io/badge/Prod-Hado-blue)](https://hado.kinbox.com.br/)
 [![Staging Hado](https://img.shields.io/badge/Staging-Hado-green)](https://hado.kinbox.com.br/)
 
 </div>
+
+Este repositório contém os nodes utilizados pelo sistema Hado. Aqui você pode contribuir com novos nodes, editar existentes ou apenas entender como tudo funciona por baixo dos panos.
+
+---
 
 ## 🚀 Criando um novo node de integração
 
