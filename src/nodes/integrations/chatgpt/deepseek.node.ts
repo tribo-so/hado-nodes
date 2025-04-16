@@ -2,8 +2,8 @@ import dayjs from "dayjs";
 import { Node, NodeCategory, builder } from "src/nodes";
 
 export default {
-  type: "deepseek",
-  label: "DeepSeek2",
+  type: "deepseek3",
+  label: "DeepSeek3",
   description: "Chat with DeepSeek",
   image_src:
     "https://cdn-icons-png.flaticon.com/512/10817/10817293.png",
