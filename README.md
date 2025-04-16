@@ -1,3 +1,20 @@
+<p align="center">
+  <a href="https://hado.kinbox.com.br">
+    <img src="https://cdn-icons-png.flaticon.com/512/18048/18048580.png" width="250" alt="Hado-api Logo" />
+  </a>
+</p>
+
+<h1 align="center">Hado Nodes</h1>
+
+<div align="center">
+
+✨✨✨ Hado Nodes ✨✨✨
+
+[![Prod Hado](https://img.shields.io/badge/Prod-Hado-blue)](https://hado.kinbox.com.br/)
+[![Staging Hado](https://img.shields.io/badge/Staging-Hado-green)](https://hado.kinbox.com.br/)
+
+</div>
+
 # 🧩 Nodes
 
 Este repositório contém os nodes utilizados pelo sistema Hado. Aqui você pode contribuir com novos nodes, editar existentes ou apenas entender como tudo funciona por baixo dos panos.
@@ -164,6 +181,3 @@ git push origin main
 ## 💬 Dúvidas?
 
 Fale com o time de engenharia ou abra uma issue neste repositório.
-```
-
----
