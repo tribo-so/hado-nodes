@@ -10,11 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger DigitalOcean App Rebuild
-        env:
-          DO_APP_ID: ${{ secrets.DO_APP_ID }}
-          DO_API_TOKEN: ${{ secrets.DO_API_TOKEN }}
         run: |
-          curl -X POST "https://api.digitalocean.com/v2/apps/$DO_APP_ID/deployments" \
-            -H "Authorization: Bearer $DO_API_TOKEN" \
+          curl -X POST "https://api.digitalocean.com/v2/apps/${{ secrets.DO_APP_ID }}/deployments" \
+            -H "Authorization: Bearer ${{ secrets.DO_API_TOKEN }}" \
             -H "Content-Type: application/json" \
-            -d '{"force_rebuild": true}'
+            -d '{}'
