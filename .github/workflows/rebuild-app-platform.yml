@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Trigger DigitalOcean App Rebuild
         run: |
-          curl -X POST "https://api.digitalocean.com/v2/apps/${{ secrets.DO_APP_ID }}/deployments" \
+          curl -X POST "https://api.digitalocean.com/v2/apps/448498c3-b473-4c6b-bff3-bd06b18445fe/deployments" \
             -H "Authorization: Bearer ${{ secrets.DO_API_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d '{"force_rebuild": true}'
