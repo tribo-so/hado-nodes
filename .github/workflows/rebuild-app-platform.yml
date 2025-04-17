@@ -1,0 +1,16 @@
+name: Trigger DigitalOcean Rebuild
+
+on:
+  push:
+    branches:
+      - main # ou o branch que quiser monitorar
+
+jobs:
+  rebuild-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger DigitalOcean App Rebuild
+        run: |
+          curl -X POST "https://api.digitalocean.com/v2/apps/${{ secrets.DO_APP_ID }}/deployments" \
+            -H "Authorization: Bearer ${{ secrets.DO_API_TOKEN }}" \
+            -H "Content-Type: application/json"
