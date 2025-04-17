@@ -2,8 +2,8 @@ import dayjs from "dayjs";
 import { Node, NodeCategory, builder } from "src/nodes";
 
 export default {
-  type: "gemini3",
-  label: "Gemini3",
+  type: "gemini5",
+  label: "Gemini5",
   description: "Chat with DeepSeek",
   image_src:
     "https://cdn-icons-png.flaticon.com/512/10817/10817293.png",

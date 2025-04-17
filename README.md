@@ -12,6 +12,7 @@
 
 [![Prod Hado](https://img.shields.io/badge/Prod-Hado-blue)](https://hado.kinbox.com.br/)
 [![Staging Hado](https://img.shields.io/badge/Staging-Hado-green)](https://hado.kinbox.com.br/)
+[![DO Hado](https://img.shields.io/badge/Staging-Hado-green)](https://cloud.digitalocean.com/apps/448498c3-b473-4c6b-bff3-bd06b18445fe/)
 
 </div>
 
