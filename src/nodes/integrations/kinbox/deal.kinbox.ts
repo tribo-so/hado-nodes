@@ -61,7 +61,6 @@ const properties = {
     dynamic_options: {
       enabled: true,
       get: async (ctx) => {
-        console.log("get pipeline", ctx);
         return ctx
           .fetch<KinboxPaginatedResponse<KinboxGeneric>>(`/pipelines`)
           .then((response) => {

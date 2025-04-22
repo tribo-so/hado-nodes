@@ -61,7 +61,6 @@ export default {
       label: "Get a contact",
       properties: [properties.id],
       run: async (ctx, cmd) => {
-        console.log("get ----- chegou aqui", ctx.properties.id);
         cmd.runFetch(`/contacts/${ctx.properties.id}`);
       },
     },
