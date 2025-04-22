@@ -44,16 +44,18 @@ export interface Node {
     //   properties?: z.infer<typeof zAllProperties>[];
     //   optional_properties?: z.infer<typeof zAllProperties>[];
     // }>;
-    triggers?: (NodeOperation & {
-        subscribe?: (ctx: SubscribeContext) => Promise<void>
-        unsubscribe?: (ctx: SubscribeContext) => Promise<void>
-    })[]
+    triggers?: NodeTrigger[]
 }
 
 export interface NodeAction {
     id: string
     label: string
     operations: NodeOperation[]
+}
+
+export type NodeTrigger = NodeOperation & {
+    subscribe?: (ctx: SubscribeContext) => Promise<void>
+    unsubscribe?: (ctx: SubscribeContext) => Promise<void>
 }
 
 export type NodeProperty = z.infer<typeof zAllProperties>
