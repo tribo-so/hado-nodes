@@ -11,7 +11,7 @@ describe("Await Node", () => {
         wait_interval_unit: "minutes",
       },
     });
-,
+    
     await AwaitNode.actions?.[0]?.operations?.[0]?.run(...args);
 
     expect(args[1].halt).toHaveBeenCalled();
