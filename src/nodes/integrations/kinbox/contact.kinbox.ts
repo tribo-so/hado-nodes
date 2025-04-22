@@ -1,5 +1,8 @@
 import { builder, buildQueryString, CoreProperty, NodeAction } from "src/nodes";
-import { transformPropertiesToKinboxPayload } from "./helper.kinbox";
+import {
+  getCustomFieldsProperties,
+  transformPropertiesToKinboxPayload,
+} from "./helper.kinbox";
 import { KinboxGeneric, KinboxPaginatedResponse } from "./types.kinbox";
 
 const properties = {
@@ -90,6 +93,7 @@ export default {
       label: "Create a contact",
       dynamic_properties: {
         enabled: true,
+        get: getCustomFieldsProperties,
       },
       properties: [
         {
@@ -112,9 +116,6 @@ export default {
     {
       id: "update",
       label: "Update a contact",
-      dynamic_properties: {
-        enabled: true,
-      },
       properties: [
         {
           ...properties.id,
@@ -124,6 +125,10 @@ export default {
       optional_properties: {
         label: "Extra fields",
         properties: saveProperties,
+      },
+      dynamic_properties: {
+        enabled: true,
+        get: getCustomFieldsProperties,
       },
       run: async (ctx, cmd) => {
         const { id, ...rest } = ctx.properties;

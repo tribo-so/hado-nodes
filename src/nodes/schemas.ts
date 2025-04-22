@@ -39,6 +39,11 @@ export const zDynamicOptions = z.object({
   depends_on: z.string().array().optional(),
 });
 
+export const zDynamicProperties = z.object({
+  enabled: z.boolean(),
+  depends_on: z.string().array().optional(),
+});
+
 export const zComboboxProperty = zBaseProperty.extend({
   type: zPropertyType.refine((type) => type === PropertyType.COMBOBOX),
   dynamic_options: zDynamicOptions,
@@ -144,12 +149,7 @@ export const zNodeOperation = z.object({
   label: z.string(),
   description: z.string().optional(),
   properties: zAllProperties.array().optional(),
-  dynamic_properties: z
-    .object({
-      enabled: z.boolean(),
-      depends_on: z.string().array().optional(),
-    })
-    .optional(),
+  dynamic_properties: zDynamicProperties.optional(),
   optional_properties: z
     .object({
       label: z.string(),
@@ -192,15 +192,15 @@ export const zNodeMeta = z.object({
   description: z.string(),
   image_src: z.string().optional(),
   category: z.nativeEnum(NodeCategory),
-  properties: zAllProperties.array().optional(),
-  default_properties_values: z.record(z.string(), z.any()).optional(),
+  // properties: zAllProperties.array().optional(),
+  // default_properties_values: z.record(z.string(), z.any()).optional(),
   actions: zNodeAction.array().optional(),
-  dynamic_properties: z
-    .object({
-      enabled: z.boolean(),
-      depends_on: z.string().array().optional(),
-    })
-    .optional(),
+  // dynamic_properties: z
+  //   .object({
+  //     enabled: z.boolean(),
+  //     depends_on: z.string().array().optional(),
+  //   })
+  //   .optional(),
   credentials: zCredentialMeta.array().optional(),
 });
 

@@ -1,10 +1,7 @@
-import { builder } from "src/nodes";
-import { KinboxCustomField } from "./types.kinbox";
+import { builder, DynamicPropertiesContext } from "src/nodes";
+import { KinboxCustomField, KinboxPaginatedResponse } from "./types.kinbox";
 
-function getCustomFieldId(
-  entity: KinboxCustomField["entity"],
-  placeholder: string
-) {
+function getCustomFieldId(placeholder: string) {
   return `custom-field:${placeholder}`;
 }
 
@@ -13,13 +10,13 @@ function transformKinboxCustomFieldToProperty(customField: KinboxCustomField) {
     case "number":
       return builder.property.number({
         badge: "Custom",
-        id: getCustomFieldId(customField.entity, customField.placeholder),
+        id: getCustomFieldId(customField.placeholder),
         label: customField.name,
       });
     case "decimal":
       return builder.property.number({
         badge: "Custom",
-        id: getCustomFieldId(customField.entity, customField.placeholder),
+        id: getCustomFieldId(customField.placeholder),
         label: customField.name,
       });
     case "select":
@@ -28,7 +25,7 @@ function transformKinboxCustomFieldToProperty(customField: KinboxCustomField) {
           ? JSON.parse(customField.options)
           : customField.options;
       return builder.property.select({
-        id: getCustomFieldId(customField.entity, customField.placeholder),
+        id: getCustomFieldId(customField.placeholder),
         label: customField.name,
         badge: "Custom",
         options: kOptions.map((option: { value: string }) => ({
@@ -42,7 +39,7 @@ function transformKinboxCustomFieldToProperty(customField: KinboxCustomField) {
           ? JSON.parse(customField.options)
           : customField.options;
       return builder.property.select({
-        id: getCustomFieldId(customField.entity, customField.placeholder),
+        id: getCustomFieldId(customField.placeholder),
         label: customField.name,
         badge: "Custom",
         options: kMultiOptions.map((option: { value: string }) => ({
@@ -52,20 +49,20 @@ function transformKinboxCustomFieldToProperty(customField: KinboxCustomField) {
       });
     case "textarea":
       return builder.property.text({
-        id: getCustomFieldId(customField.entity, customField.placeholder),
+        id: getCustomFieldId(customField.placeholder),
         badge: "Custom",
         label: customField.name,
       });
     case "json":
       return builder.property.text({
-        id: getCustomFieldId(customField.entity, customField.placeholder),
+        id: getCustomFieldId(customField.placeholder),
         badge: "Custom",
         label: customField.name,
       });
     default:
     case "text":
       return builder.property.text({
-        id: getCustomFieldId(customField.entity, customField.placeholder),
+        id: getCustomFieldId(customField.placeholder),
         badge: "Custom",
         label: customField.name,
       });
@@ -101,3 +98,20 @@ export function transformPropertiesToKinboxPayload(
     return acc;
   }, {} as any);
 }
+
+export const getCustomFieldsProperties = async (
+  ctx: DynamicPropertiesContext
+) => {
+  const response =
+    await ctx.fetch<KinboxPaginatedResponse<KinboxCustomField>>(
+      "/custom-fields"
+    );
+
+  return {
+    properties: [],
+    optional_properties: transformKinboxCustomFieldsToProperties(
+      ctx.action_id as KinboxCustomField["entity"],
+      response.data.data
+    ),
+  };
+};

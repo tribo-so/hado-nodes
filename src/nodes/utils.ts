@@ -58,6 +58,11 @@ export const createRunFetcher = (dto: {
     },
   });
 
+  client.interceptors.request.use((config) => {
+    dto.cmd.halt();
+    return config;
+  });
+
   client.interceptors.response.use((response) => {
     if (response.status.toString().startsWith("2")) {
       dto.cmd.resume({ output: response.data, skip_run: true });

@@ -6,6 +6,7 @@ import {
   zComboboxProperty,
   zCredentialMeta,
   zDynamicOptions,
+  zDynamicProperties,
   zNodeMeta,
   zNodeOperation,
   zSectionProperty,
@@ -33,16 +34,16 @@ export interface Node {
   image_src: string;
   color: string;
   category: NodeCategory;
-  default_properties_values?: Record<string, any>;
-  properties: z.infer<typeof zAllProperties>[];
-  optional_properties?: z.infer<typeof zAllProperties>[];
+  // default_properties_values?: Record<string, any>;
+  // properties: z.infer<typeof zAllProperties>[];
+  // optional_properties?: z.infer<typeof zAllProperties>[];
   actions?: NodeAction[];
   credentials?: CredentialMeta[];
-  run(ctx: RunContext, cmd: Commands);
-  get_dynamic_properties?: (ctx: DynamicPropertiesContext) => Promise<{
-    properties?: z.infer<typeof zAllProperties>[];
-    optional_properties?: z.infer<typeof zAllProperties>[];
-  }>;
+  // run(ctx: RunContext, cmd: Commands);
+  // get_dynamic_properties?: (ctx: DynamicPropertiesContext) => Promise<{
+  //   properties?: z.infer<typeof zAllProperties>[];
+  //   optional_properties?: z.infer<typeof zAllProperties>[];
+  // }>;
   triggers?: {
     id: string;
     label: string;
@@ -65,6 +66,7 @@ export interface NodeAction {
 export type NodeProperty = z.infer<typeof zAllProperties>;
 
 export type NodeOperation = Omit<z.infer<typeof zNodeOperation>, "type"> & {
+  dynamic_properties?: DynamicPropertiesPowered;
   run: (
     ctx: RunContext,
     cmd: Commands,
@@ -161,9 +163,17 @@ export interface TestCredentialContext {
 export type SelectOption = z.infer<typeof zSelectOption>;
 
 export type DynamicOptions = z.infer<typeof zDynamicOptions>;
+export type DynamicProperties = z.infer<typeof zDynamicProperties>;
 
 export type DynamicOptionsPowered = DynamicOptions & {
   get?: (ctx: DynamicOptionsContext) => Promise<SelectOption[]>;
+};
+
+export type DynamicPropertiesPowered = DynamicProperties & {
+  get: (ctx: DynamicPropertiesContext) => Promise<{
+    properties?: z.infer<typeof zAllProperties>[];
+    optional_properties?: z.infer<typeof zAllProperties>[];
+  }>;
 };
 
 export type ComboboxProperty = z.infer<typeof zComboboxProperty> & {

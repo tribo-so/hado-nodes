@@ -1,5 +1,5 @@
 import { builder, buildQueryString, CoreProperty, NodeAction } from "src/nodes";
-import { transformPropertiesToKinboxPayload } from "./helper.kinbox";
+import { getCustomFieldsProperties, transformPropertiesToKinboxPayload } from "./helper.kinbox";
 import { KinboxGeneric, KinboxPaginatedResponse } from "./types.kinbox";
 
 const properties = {
@@ -195,6 +195,7 @@ export default {
       label: "Get many deals",
       dynamic_properties: {
         enabled: true,
+        get: getCustomFieldsProperties,
       },
       properties: [CoreProperty.pagination],
       optional_properties: {
@@ -225,6 +226,7 @@ export default {
       label: "Create a deal",
       dynamic_properties: {
         enabled: true,
+        get: getCustomFieldsProperties,
       },
       properties: [
         {
@@ -253,6 +255,7 @@ export default {
       label: "Update a deal",
       dynamic_properties: {
         enabled: true,
+        get: getCustomFieldsProperties,
       },
       properties: [
         {
