@@ -49,9 +49,9 @@ export interface Node {
     label: string;
     properties: z.infer<typeof zAllProperties>[];
     optional_properties?: z.infer<typeof zAllProperties>[];
-    run(ctx: RunContext, cmd: Commands);
-    subscribe(ctx: SubscribeContext);
-    unsubscribe(ctx: SubscribeContext);
+    run: (ctx: RunContext, cmd: Commands) => Promise<void>;
+    subscribe?: (ctx: SubscribeContext) => Promise<void>;
+    unsubscribe?: (ctx: SubscribeContext) => Promise<void>;
   }[];
 }
 
