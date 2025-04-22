@@ -1,7 +1,7 @@
 import { Node, NodeCategory } from "src/nodes";
 
 export default {
-  type: "trigger:manual",
+  type: "manual",
   label: "Trigger Manual",
   description:
     "Triggers start your workflow. Workflows can have multiple triggers.",
