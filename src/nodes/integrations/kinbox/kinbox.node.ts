@@ -1,6 +1,10 @@
 import contact from "./contact.kinbox";
 import deal from "./deal.kinbox";
-import { KinboxCustomField, KinboxPaginatedResponse } from "./types.kinbox";
+import {
+  KinboxCustomField,
+  KinboxGeneric,
+  KinboxPaginatedResponse,
+} from "./types.kinbox";
 import { transformKinboxCustomFieldsToProperties } from "./helper.kinbox";
 import { Node, NodeCategory, AuthorizationType, builder } from "src/nodes";
 
@@ -53,4 +57,28 @@ export default {
       ),
     };
   },
+  triggers: [
+    {
+      id: "session:new",
+      label: "New Session",
+      properties: [],
+      run: async (ctx, cmd) => {
+        cmd.output(ctx.input);
+      },
+      subscribe: async (ctx) => {
+        const response = await ctx.fetch.post<KinboxGeneric>("/webhooks", {
+          url: ctx.webhook_url,
+          secret: "kinbox-secret",
+          events: ["session:new"],
+        });
+        ctx.saveVariable(ctx.webhook_url, response.data.id, {
+          secret: true,
+        });
+      },
+      unsubscribe: async (ctx) => {
+        const webhookId = ctx.variables[ctx.webhook_url];
+        await ctx.fetch.delete(`/webhooks/${webhookId}`);
+      },
+    },
+  ],
 } satisfies Node;

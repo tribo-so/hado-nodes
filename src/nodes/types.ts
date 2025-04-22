@@ -43,7 +43,18 @@ export interface Node {
     properties?: z.infer<typeof zAllProperties>[];
     optional_properties?: z.infer<typeof zAllProperties>[];
   }>;
+  triggers?: {
+    id: string;
+    label: string;
+    properties: z.infer<typeof zAllProperties>[];
+    optional_properties?: z.infer<typeof zAllProperties>[];
+    run(ctx: RunContext, cmd: Commands);
+    subscribe(ctx: SubscribeContext);
+    unsubscribe(ctx: SubscribeContext);
+  }[];
 }
+
+export interface NodeTrigger extends Node {}
 
 export interface NodeAction {
   id: string;
@@ -130,6 +141,16 @@ export interface RunContext {
   variables: Record<string, any>;
   halted: boolean;
   halted_data?: any;
+}
+
+export interface SubscribeContext {
+  webhook_url: string;
+  properties: Record<string, any>;
+  trigger_id?: string;
+  credentials: Credential;
+  variables: Record<string, any>;
+  fetch: AxiosInstance;
+  saveVariable: (key: string, value: any, opts?: { secret?: boolean }) => void;
 }
 
 export interface TestCredentialContext {
